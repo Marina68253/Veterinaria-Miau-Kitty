@@ -31,7 +31,7 @@ class Clientes {
   }
   public setVip(vip:boolean):void {
    this.vip = vip;
-}
+} 
 
   
 }
