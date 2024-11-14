@@ -1,15 +1,20 @@
 class Pacientes {
-    private id:number;
+    private idPaciente:number;
+    private idDuenio:number;
     private nombre: string;
     private especies:string;
 
-    constructor(id:number , nombre:string ,especies:string) {
-        this.id = id;
+    constructor(idPaciente:number , nombre:string ,especies:string,idDuenio:number) {
+        this.idPaciente = idPaciente;
+        this.idDuenio=idDuenio;
         this.nombre = nombre;
         this.especies = especies;
     }
-    public getId():number {
-        return this.id;
+    public getIdPaciente():number {
+        return this.idPaciente;
+    }
+    public getIdDuenio():number{
+        return this.idDuenio;
     }
     public getNombre():string {
         return this.nombre;
@@ -17,8 +22,11 @@ class Pacientes {
     public getEspecies():string {
         return this.especies;
     }
-    public setId(id:number):void {
-        this.id = id;
+    public setIdPaciente(idPaciente:number):void {
+        this.idPaciente = idPaciente;
+    }
+    public setIdDuenio(idDuenio:number):void{
+        this.idDuenio=idDuenio;
     }
     public setNombre(nombre:string):void {
         this.nombre = nombre;

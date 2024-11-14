@@ -1,5 +1,5 @@
-class SurcusalesVeterinaria {
-    private id: number;
+class Veterinaria {
+private id: number;
 private nombre:string;
 private direccion: string;
 
