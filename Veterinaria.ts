@@ -1,8 +1,15 @@
+<<<<<<< HEAD:SurcusalesVeterinaria.ts
 class SurcusalesVeterinaria {
     //Atributos
     private id: number;
     private nombre: string;
     private direccion: string;
+=======
+class Veterinaria {
+private id: number;
+private nombre:string;
+private direccion: string;
+>>>>>>> bace0468a8f0b3416a161ebda5ae493b36ddb4e9:Veterinaria.ts
 
     constructor(nombre: string, direccion: string) {
         // Estoy generando un ID único basado en la fecha y un valor aleatorio
