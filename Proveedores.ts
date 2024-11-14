@@ -1,15 +1,15 @@
 class Proveedores{
-        private id:number;
+        private idProveedores:number;
         private nombre: string;
         private telefono: number;
-        constructor(id:number , nombre:string , telefono:number) {
-            this.id = id;
+        constructor(idProveedores:number , nombre:string , telefono:number) {
+            this.idProveedores = idProveedores;
             this.nombre = nombre;
             this.telefono = telefono;
 
 }
-public getId():number {
-    return this.id;
+public getIdProveedores():number {
+    return this.idProveedores;
 }
 public getNombre():string {
     return this.nombre;
@@ -17,8 +17,8 @@ public getNombre():string {
 public getTelefono():number{
     return this.telefono;
 }
-public setId(id:number):void {
-    this.id = id;
+public setIdProveedores(idProveedores:number):void {
+    this.idProveedores = idProveedores;
 }
 public setNombre(nombre:string):void {
     this.nombre = nombre;
