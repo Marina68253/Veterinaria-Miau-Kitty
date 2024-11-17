@@ -57,4 +57,19 @@ cliente2.registrarVisitas();
 cliente2.registrarVisitas(); 
 cliente2.mostrarInformacionCliente();
 
+//Muestra un menu de entradarda pera interuatuar con el usuario
+const menuOpcion = prompt("Elige una opción: 1) Ver Veterinaria 2) Ver Cliente 3) Ver Paciente");
 
+switch (menuOpcion) {
+  case '1':
+    veterinaria.mostrarInformacionVeterinaria();
+    break;
+  case '2':
+    cliente1.mostrarInformacionCliente();
+    break;
+  case '3':
+    paciente1.mostrarInformacionPaciente();
+    break;
+  default:
+    console.log("Opción no válida.");
+}
