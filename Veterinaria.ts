@@ -60,9 +60,10 @@ export class Veterinaria {
     }
     
     //Leo la informacion guardada de mis instancias
-    getDatos(): string {
-        return `ID: ${this.id}, Nombre: ${this.nombre}, Dirección: ${this.direccion}`;
-    }
+   // getDatos(): string {
+       // return `ID: ${this.id}, Nombre: ${this.nombre}, Dirección: ${this.direccion}`;}
+
+
     setId(id: number): void {
         this.id = id;
     }
@@ -72,12 +73,9 @@ export class Veterinaria {
     setDireccion(direccion: string): void {
         this.direccion = direccion;
     }
-
-
-
-
-
-
+    mostrarInformacionVeterinaria(): void {
+        console.log(`Veterinaria: ${this.nombre}\n 
+        Dirección: ${this.getDireccion()}`);}
 
 
 }
