@@ -60,5 +60,16 @@ export class Cliente {
 
     registrarVisitas(): void {
         this.cantVisitas += 1;
+
+        if (this.cantVisitas >= 5 && !this.esVip) {
+            this.esVip = true;
+            console.log(`${this.nombre} ahora es un cliente VIP por haber realizado ${this.cantVisitas} visitas.`);
+        }
     }
+    mostrarInformacionCliente(): void {
+        console.log(` Nombre del Cliente: ${this.nombre}\n 
+            Teléfono: ${this.telefono}\n 
+            ¿Es VIP?: ${this.esVip ? "Sí" : "No"}\n 
+            las cantidad de visitas que ha realizado: ${this.cantVisitas}`);
+            }
 }
