@@ -1,5 +1,4 @@
 import { Veterinaria } from "./Veterinaria";
-import { Proveedor } from "./Proveedor";
 
 class RedVeterinaria {
     private veterinarias: Veterinaria[];

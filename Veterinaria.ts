@@ -5,7 +5,7 @@ export class Veterinaria {
     //Atributos
     private id: number;
     private nombre: string;
-    private direccion: string;
+    private direccion: string; 
     private clientes: Cliente[];
     private pacientes: Paciente[];
 
@@ -22,6 +22,11 @@ export class Veterinaria {
         this.clientes.push(cliente);
     }
 
+    modificarCliente(id: number, cliente: Cliente): void {
+        const nuevoCliente = this.clientes.findIndex(cliente => cliente.getId() == id);
+        if (nuevoCliente !== -1) this.clientes[nuevoCliente] = cliente;
+    }
+
     darBajaCliente(id: number): void {
         this.clientes = this.clientes.filter(cliente => cliente.getId() !== id);
     }
@@ -34,24 +39,14 @@ export class Veterinaria {
     eliminarPaciente(idCliente: number): void {
         this.pacientes = this.pacientes.filter(paciente => paciente.getIdCliente() !== idCliente);
     }
-
+    
     // Método para modificar los datos de la veterinaria usando setters
 
     modificarDatos(nombre: string, direccion: string): void {
-        this.setNombre(nombre);  // Usa el setter para el nombre
-        this.setDireccion(direccion);  // Usa el setter para la dirección
+        this.setNombre (nombre);  // Usa el setter para el nombre
+        this.setDireccion (direccion);  // Usa el setter para la dirección
     }
 
-    modificarClientePorId(id: number, telefono: number): void {
-        for (let cliente of this.clientes) {
-            if (cliente.getId() === id) {
-                cliente.setTelefono(telefono); // Modifica el atributo teléfono
-                console.log(`Cliente con ID ${id} modificado exitosamente.`);
-                return;
-            }
-        }
-        console.log(`Cliente con ID ${id} no encontrado.`);
-    }
 
     //Get y Set
     getId(): number {
@@ -63,6 +58,10 @@ export class Veterinaria {
     getDireccion(): string {
         return this.direccion;
     }
+    
+    //Leo la informacion guardada de mis instancias
+   // getDatos(): string {
+       // return `ID: ${this.id}, Nombre: ${this.nombre}, Dirección: ${this.direccion}`;}
 
 
     setId(id: number): void {
@@ -76,8 +75,7 @@ export class Veterinaria {
     }
     mostrarInformacionVeterinaria(): void {
         console.log(`Veterinaria: ${this.nombre}\n 
-        Dirección: ${this.getDireccion()}`);
-    }
+        Dirección: ${this.getDireccion()}`);}
 
 
 }
