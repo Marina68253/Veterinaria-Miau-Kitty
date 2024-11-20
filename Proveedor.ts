@@ -1,15 +1,15 @@
-class Proveedor {
+export class Proveedor {
 
     private id: number;
     private nombre: string;
-    private dni:number;
+    private dni: number;
     private telefono: number;
 
-    constructor(nombre: string, telefono: number,dni:number) {
+    constructor(nombre: string, telefono: number, dni: number) {
         this.id = Date.now() + Math.floor(Math.random() * 500);
         this.nombre = nombre;
         this.telefono = telefono;
-        this.dni=dni;
+        this.dni = dni;
     }
 
     getId(): number {
@@ -41,7 +41,7 @@ class Proveedor {
         console.log(`Proveedor: ${this.nombre}\n 
             DNI:${this.dni}\n
             Teléfono: ${this.telefono}`);
-            }
+    }
 }
 
 
