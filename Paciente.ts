@@ -10,7 +10,7 @@ export class Paciente {
 
     constructor(cliente: Cliente, nombre: string, especie: string, edad: number) {
         this.id = this.generarIdUnico();
-        this.idCliente = cliente.getId(); // Relacionamos el paciente con el ID del cliente
+        this.idCliente = cliente.getId(); // Relacionamos el paciente con el ID del cliente..
         this.cliente = cliente;
         this.nombre = nombre;
         this.especie = especie;

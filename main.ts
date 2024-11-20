@@ -11,7 +11,7 @@ const cliente2 = new Cliente("Maria Gonzalez", 987654321, false);
 const cliente3 = new Cliente("Tomas Delta", 19356345, false);
 
 
-// Crear instancias de pacientes relacionados con clientes
+// Crear instancias de pacientes relacionados con clientes..
 const paciente1 = new Paciente(cliente1, "Firulais", "Perro", 5);
 const paciente2 = new Paciente(cliente3, "Michi", "Gato", 3);
 const paciente3 = new Paciente(cliente2, "Luna", "Conejo", 7);

@@ -66,7 +66,7 @@ export class Cliente {
         }
     }
 
-    //Metodo para mostrar informacion sobre cliente y si es vip dependiendo sus visitas
+    //Metodo para mostrar informacion sobre cliente y si es vip dependiendo sus visitas..
     mostrarInformacionCliente(): void {
         console.log
             (`Nombre del Cliente: ${this.nombre}\n 
