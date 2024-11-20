@@ -11,7 +11,8 @@ class Proveedor {
         this.telefono = telefono;
         this.dni=dni;
     }
-
+    //Getters y Setters
+    
     getId(): number {
         return this.id;
     }

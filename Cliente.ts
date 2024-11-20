@@ -66,6 +66,8 @@ export class Cliente {
             console.log(`${this.nombre} ahora es un cliente VIP por haber realizado ${this.cantVisitas} visitas.`);
         }
     }
+
+    //Metodo para mostrar informacion sobre cliente y si es vip dependiendo sus visitas..
     mostrarInformacionCliente(): void {
         console.log(` Nombre del Cliente: ${this.nombre}\n 
             Teléfono: ${this.telefono}\n 

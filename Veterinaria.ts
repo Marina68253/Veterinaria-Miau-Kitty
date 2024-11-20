@@ -17,7 +17,7 @@ export class Veterinaria {
         this.pacientes = [];
     }
 
-    // Métodos para manejar clientes
+    // Métodos para manejar clientes..
     darAltaCliente(cliente: Cliente): void {
         this.clientes.push(cliente);
     }

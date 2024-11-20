@@ -8,7 +8,7 @@ class RedVeterinaria {
         this.veterinarias = [];
         this.proveedores = [];
     }
-
+    //Dar altas y modificar veterinaria
     darAltaVeterinaria(veterinaria: Veterinaria): void {
         this.veterinarias.push(veterinaria);
     }

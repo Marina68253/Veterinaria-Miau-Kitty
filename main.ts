@@ -10,13 +10,15 @@ console.log(`Cliente 1 creado con ID: ${cliente1.getId()}`);
 const cliente2 = new Cliente("Maria Gonzalez", 987654321,false );
 const cliente3 = new Cliente("tomas delta", 19356345,false );
 
-// Crear instancias de pacientes relacionados con clientes
-const paciente1 = new Paciente(cliente1, "Firulais", "Perro",5);
-const paciente2 = new Paciente(cliente1, "Michi", "Gato",3);
-const paciente3 = new Paciente(cliente2, "Luna", "Conejo",7);
+// Crear instancias de pacientes relacionados con clientes..
+const paciente1 = new Paciente(cliente1, "Firulais", "Perro", 5);
+const paciente2 = new Paciente(cliente3, "Michi", "Gato", 3);
+const paciente3 = new Paciente(cliente2, "Luna", "Conejo", 7);
 
-//muestra la informacion de paciente
-paciente1.mostrarInformacionPaciente();
+const proveedor1 = new Proveedor("Luciano", 2284334467, 3899657);
+const proveedor2 = new Proveedor("Rodrigo", 228443467, 3792928);
+
+
 
 // Crear instancia de veterinaria
 const veterinaria = new Veterinaria(1, "Veterinaria Centro", "Calle Falsa 123");
