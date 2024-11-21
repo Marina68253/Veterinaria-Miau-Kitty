@@ -16,6 +16,9 @@ const paciente1 = new Paciente(cliente1, "Firulais", "Perro",5);
 const paciente2 = new Paciente(cliente1, "Michi", "Gato",3);
 const paciente3 = new Paciente(cliente2, "Luna", "Conejo",7);
 
+const proveedor1 = new Proveedor("Luciano", 2284334467, 3899657);
+const proveedor2 = new Proveedor("Rodrigo", 228443467, 3792928);
+
 //muestra la informacion de paciente
 paciente1.mostrarInformacionPaciente();
 
