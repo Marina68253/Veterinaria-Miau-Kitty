@@ -18,6 +18,7 @@ const paciente3 = new Paciente(cliente2, "Luna", "Conejo", 7);
 
 const proveedor1 = new Proveedor("Luciano", 2284334467, 3899657);
 const proveedor2 = new Proveedor("Rodrigo", 228443467, 3792928);
+const proveedor3 = new Proveedor("Natalia", 228464879, 3579764);
 
 
 
@@ -33,6 +34,7 @@ paciente1.mostrarInformacionPaciente();
 
 proveedor1.mostrarInformacionProvedores();
 proveedor2.mostrarInformacionProvedores();
+proveedor3.mostrarInformacionProvedores();
 
 // Dar de alta a los clientes
 veterinaria.darAltaCliente(cliente1);
