@@ -12,7 +12,7 @@ export class Proveedor {
         this.dni = dni;
     }
     //Getters y Setters
-    
+
     getIdProveedor(): number {
         return this.idProveedor;
     }
@@ -37,6 +37,11 @@ export class Proveedor {
     setDni(dni: number): void {
         this.dni = dni;
     }
+    modificarDatosProv(nombre: string, telefono: number): void {
+        this.setNombre(nombre);  // Usa el setter para el nombre
+        this.setTelefono(telefono);  // Usa el setter para la dirección
+
+    }
 
     mostrarInformacionProvedores(): void {
         console.log(`El ID del Proveedor es:${this.idProveedor}\n
@@ -44,4 +49,5 @@ export class Proveedor {
             DNI:${this.dni}\n
             Teléfono: ${this.telefono}`);
     }
+
 }

@@ -47,6 +47,7 @@ export class Veterinaria {
         this.setNombre(nombre);  // Usa el setter para el nombre
         this.setDireccion(direccion);  // Usa el setter para la dirección
     }
+    
 
     modificarClientePorId(idCliente: number,nombre:string, telefono: number,esVip:boolean = false): void {
         for (let cliente of this.clientes) {
