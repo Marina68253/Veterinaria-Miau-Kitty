@@ -109,5 +109,5 @@ export class Veterinaria {
     obtenerPaciente(): Paciente[] {
         return this.pacientes;
     }
-   
+
 }

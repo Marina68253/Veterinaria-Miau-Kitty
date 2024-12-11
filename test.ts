@@ -4,7 +4,9 @@ import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
 import { RedVeterinaria } from "./RedVeterinaria";
 import { Veterinaria } from "./Veterinaria";
+
 import { read } from "fs";
+
 
 
 
@@ -42,11 +44,11 @@ const mostrarTituloVeterinaria = () => {
 
 async function mostrarMenu() {
   mostrarTituloVeterinaria();
+
   const titulo = chalk.hex(pastelPink).bold.underline;  // Título en rosa pastel
   const opcion = chalk.hex(pastelPink).bold;            // Opciones en rosa pastel
   const advertencia = chalk.hex("#FF6F61").bold;       // Rojo coral para advertencias
   const pregunta = chalk.hex("#A9A9A9");               // Gris suave para preguntas
-
 
   const veterinaria = new Veterinaria("Veterinaria Principal", "Cnel Suarez 223");
   let salir = false;
@@ -55,6 +57,7 @@ async function mostrarMenu() {
     console.log(titulo("\nMenú Principal:"));
     console.log("---------------------------");
     console.log(`
+
       ${opcion('1.🔍- Gestión de Veterinaria')}
       ${opcion('2.🔍- Gestión de Proveedores')}
       ${opcion('3.🔍- Gestión de Clientes')}
@@ -63,6 +66,8 @@ async function mostrarMenu() {
     `);
     const opcionMenu = readlineSync.question(pregunta("Seleccione una opción: "));
     // console.log("opcionMenu:", opcionMenu.join());
+    const opcionMenu = readlineSync.question("Seleccione una opcion: ");
+
     switch (opcionMenu) {
       case "1":
 
@@ -77,12 +82,15 @@ async function mostrarMenu() {
         submenuProveedores();
         break;
       case "3":
+
         console.log(opcion("Ingresando a la gestión de clientes...\n"));
         console.log("---------------------------");
+
         submenuClientes(veterinaria);
         break;
 
       case "4":
+
         console.log(opcion("Ingresando a la gestión de pacientes...\n"));
         console.log("---------------------------");
         submenuPacientes(veterinaria);
@@ -92,6 +100,14 @@ async function mostrarMenu() {
         console.log("---------------------------");
         salir = true;
         break;
+
+        submenuPacientes(veterinaria);
+        break;
+      case "5":
+        console.log("Saliendo del programa...");
+         salir = true;
+         break;
+
       default:
 
         console.log("Opcion invalida. Intente nuevamente.");
@@ -103,6 +119,7 @@ async function mostrarMenu() {
 
 
   }
+
 
 }
 async function submenuVeterinarias() {
@@ -116,12 +133,13 @@ async function submenuVeterinarias() {
     console.log("---------------------------");
     console.log(`
       Gestión de Veterinarias:
+
       1.📋 Crear Veterinaria
       2.❕❗ Modificar Veterinaria
       3.⛔ Eliminar Veterinaria
       4.✅ Listar Veterinarias
       0.⭕ Volver al menú principal
-      
+
     `);
 
     const opcion = readlineSync.question(titulo("Seleccione una opción: "));
@@ -166,7 +184,7 @@ async function submenuVeterinarias() {
           console.log(advertencia("No hay veterinarias registradas."));
         }
         break;
-      case "0": // Salir
+      case "5": // Salir
         salir = true;
         break;
       default:
@@ -188,12 +206,13 @@ async function submenuProveedores() {
     console.log(`
     
       Gestión de Proveedores:
+
       1.📋 Crear Proveedor
       2.❕ Modificar Proveedor
       3.⛔ Eliminar Proveedor
       4.✅ Listar Proveedores
       0.⭕ Volver al menú principal
-      
+
     `);
 
     const opcion = readlineSync.question(titulo("Seleccione una opcion: "));
@@ -238,6 +257,7 @@ async function submenuProveedores() {
         }
         break;
         case "0": // Salir
+
         salir = true;
         break;
       default:
@@ -252,7 +272,6 @@ async function submenuClientes(veterinaria: Veterinaria) {
   let salir = false;
 
   while (!salir) {
-
     console.log(`Gestión de Clientes:
     1.📋 Registrar Cliente
     2.📋 Modificar Cliente
@@ -260,7 +279,8 @@ async function submenuClientes(veterinaria: Veterinaria) {
     4.✅ Listar Clientes
     5.✍🏻 Registrar Visita de Cliente
     0.⭕ Volver al menú principal`);
-   
+    `);
+
 
     const opcion = readlineSync.question("Seleccione una opción: ");
     console.log("---------------------------");
@@ -316,7 +336,7 @@ async function submenuClientes(veterinaria: Veterinaria) {
           console.log("Cliente no encontrado.");
         }
         break;
-      case "0": // Salir
+      case "6": // Salir
         salir = true;
         break;
       default:
@@ -330,7 +350,6 @@ async function submenuPacientes(veterinaria: Veterinaria) {
   let salir = false;
 
   while (!salir) {
-
    
     console.log(`Gestión de Pacientes:
     1.🐾 Registrar Paciente
@@ -349,6 +368,7 @@ async function submenuPacientes(veterinaria: Veterinaria) {
         const edadPaciente = Number(readlineSync.question("Ingrese la edad del paciente: "));
         const idClientePaciente = Number(readlineSync.question("Ingrese el ID del cliente asociado: "));
 
+
         const clienteAsociado = veterinaria.buscarClientePorId(idClientePaciente);
         if (!clienteAsociado) {
           console.log("---------------------------");
@@ -357,10 +377,19 @@ async function submenuPacientes(veterinaria: Veterinaria) {
           break;
         }
 
+        const clienteAsociado = veterinaria.buscarClientePorId(idClientePaciente);
+        //Buscar cliente por ID;
+        if (!clienteAsociado) {
+          console.log("No se encontró un cliente con ese ID.");
+          break;
+        }
+        // Crear paciente con cliente asociado
+
         const nuevoPaciente = new Paciente(idClientePaciente, nombrePaciente, especiePaciente, edadPaciente, clienteAsociado);
         veterinaria.darAltaPaciente(nuevoPaciente);
         console.log("Paciente registrado con éxito.");
         break;
+
       case "2": // Modificar Paciente
         const idModPaciente = Number(readlineSync.question("Ingrese el ID del paciente a modificar: "));
         const pacienteModificar = veterinaria.obtenerPaciente().find(p => p.getIdCliente() === idModPaciente);
@@ -394,13 +423,14 @@ async function submenuPacientes(veterinaria: Veterinaria) {
           console.log("---------------------------");
         }
         break;
-      case "0": // Salir
+      case "5": // Salir
         salir = true;
         break;
       default:
         console.log("Opción inválida. Intente nuevamente.");
     }
   }
+
 }
 
 
