@@ -1,7 +1,7 @@
 
 export class Cliente {
 
-    private id: number;
+    private idCliente: number;
     private nombre: string;
     private telefono: number;
     private esVip: boolean;
@@ -9,17 +9,17 @@ export class Cliente {
 
     constructor(nombre: string, telefono: number, esVip: boolean = false) {
         // Generamos un ID único basado en la fecha y un valor aleatorio
-        this.id = Date.now() + Math.floor(Math.random() * 500);
+        this.idCliente = Math.floor(Math.random() * 1000);
         this.nombre = nombre;
         this.telefono = telefono;
         this.esVip = esVip;
         this.cantVisitas = 0;
     }
-    
+
 
     // Getters y Setters
-    getId(): number {
-        return this.id;
+    getIdCliente(): number {
+        return this.idCliente;
     }
 
     getNombre(): string {
@@ -38,8 +38,8 @@ export class Cliente {
         return this.cantVisitas;
     }
 
-    setId(id: number): void {
-        this.id = id;
+    setIdCliente(idCliente: number): void {
+        this.idCliente = idCliente;
     }
 
     setNombre(nombre: string): void {
@@ -69,9 +69,10 @@ export class Cliente {
 
     //Metodo para mostrar informacion sobre cliente y si es vip dependiendo sus visitas..
     mostrarInformacionCliente(): void {
-        console.log(` Nombre del Cliente: ${this.nombre}\n 
+        console.log(`El ID del cliente es: ${this.idCliente}\n
+             El nombre del Cliente es: ${this.nombre}\n 
             Teléfono: ${this.telefono}\n 
             ¿Es VIP?: ${this.esVip ? "Sí" : "No"}\n 
             las cantidad de visitas que ha realizado: ${this.cantVisitas}`);
-            }
+    }
 }

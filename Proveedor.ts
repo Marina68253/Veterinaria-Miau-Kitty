@@ -1,20 +1,20 @@
 export class Proveedor {
 
-    private id: number;
+    private idProveedor: number;
     private nombre: string;
     private dni: number;
     private telefono: number;
 
     constructor(nombre: string, telefono: number, dni: number) {
-        this.id = Date.now() + Math.floor(Math.random() * 500);
+        this.idProveedor = Date.now() + Math.floor(Math.random() * 500);
         this.nombre = nombre;
         this.telefono = telefono;
         this.dni = dni;
     }
     //Getters y Setters
     
-    getId(): number {
-        return this.id;
+    getIdProveedor(): number {
+        return this.idProveedor;
     }
     getNombre(): string {
         return this.nombre;
@@ -25,8 +25,8 @@ export class Proveedor {
     getDni(): number {
         return this.dni;
     }
-    setId(id: number): void {
-        this.id = id;
+    setIdProveedor(idProveedor: number): void {
+        this.idProveedor = idProveedor;
     }
     setNombre(nombre: string): void {
         this.nombre = nombre;
@@ -39,7 +39,8 @@ export class Proveedor {
     }
 
     mostrarInformacionProvedores(): void {
-        console.log(`Proveedor: ${this.nombre}\n 
+        console.log(`El ID del Proveedor es:${this.idProveedor}\n
+              Proveedor: ${this.nombre}\n 
             DNI:${this.dni}\n
             Teléfono: ${this.telefono}`);
     }
