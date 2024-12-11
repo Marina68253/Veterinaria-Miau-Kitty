@@ -1,34 +1,25 @@
 import { Cliente } from "./Cliente";
 
 export class Paciente {
-    private id: number;
     private idCliente: number;
     private nombre: string;
     private especie: string;
     private edad: number;
-    private cliente: Cliente
+    private cliente: Cliente;
 
-    constructor(cliente: Cliente, nombre: string, especie: string, edad: number) {
-        this.id = this.generarIdUnico();
-        this.idCliente = cliente.getId(); // Relacionamos el paciente con el ID del cliente..
+    constructor(cliente: Cliente,nombre: string, especie: string, edad: number) {
+        this.idCliente = cliente.getIdCliente();
         this.cliente = cliente;
         this.nombre = nombre;
-        this.especie = especie;
+        this.especie = especie= (especie.toLowerCase()== "gato" || especie.toLowerCase()== "perro")? especie: "exotica"
         this.edad = edad;
     }
 
-    // Genera un ID único
-    generarIdUnico(): number {
-        return Date.now() + Math.floor(Math.random() * 500);
-    }
-
     // Getters y Setters
-    getId(): number {
-        return this.id;
-    }
-    getIdCliente(): number {
-        return this.idCliente;
-    }
+   
+     getIdCliente(): number {
+         return this.idCliente;
+     }
 
     getNombre(): string {
         return this.nombre;
@@ -52,10 +43,12 @@ export class Paciente {
     }
 
     mostrarInformacionPaciente(): void {
-        console.log(`El Paciente es: ${this.nombre}\n 
-                       Su dueño es: ${this.cliente.getNombre()}
-                       El tipo de especies: ${this.especie}
-                       Edad de Mascota:${this.edad}`);
+        console.log(`El ID del Paciente es: ${this.idCliente}\n
+                         El Paciente se llama: ${this.nombre}\n 
+                       Su dueño es: ${this.cliente.getNombre()}\n
+                       El tipo de especies: ${this.especie}\n
+                       Edad de Mascota:${this.edad} años`);
     }
+    
 
 }

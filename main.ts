@@ -38,16 +38,16 @@ veterinaria.darAltaPaciente(paciente2);
 
 console.log("\n--- IDs de CLIENTES REGISTRADOS---");
 // Mostrar IDs de los clientes para referencia
-console.log(`ID Cliente 1: ${cliente1.getId()}`);
-console.log(`ID Cliente 2: ${cliente2.getId()}`);
+console.log(`ID Cliente 1: ${cliente1.getIdCliente()}`);
+console.log(`ID Cliente 2: ${cliente2.getIdCliente()}`);
 
 console.log("\n--- MODIFICACION POR ID CLIENTE ---");
 // Modificar el cliente usando su ID
-veterinaria.modificarClientePorId(cliente2.getId(), 2284567899);
+veterinaria.modificarClientePorId(cliente2.getIdCliente(), 2284567899);
 console.log(`Teléfono actualizado del Cliente 2: ${cliente2.getTelefono()}`);
 
 // Eliminar los pacientes asociados al cliente1 (Juan Perez)
-veterinaria.eliminarPaciente(cliente1.getId());
+veterinaria.eliminarPaciente(cliente1.getIdCliente());
 console.log("\n--- LISTA ACTUALIZADA DE PACIENTES  ---");
 console.log("Pacientes después de eliminar:", veterinaria["pacientes"].map(paciente => paciente.getNombre()));
 
@@ -87,7 +87,7 @@ console.log(`ID Cliente 3: ${cliente3.getId()} `);
 
 console.log("\n--- MODIFICACION POR ID CLIENTE ---");
 // Modificar el cliente usando su ID
-veterinaria.modificarClientePorId(cliente3.getId(), 22976543);
+veterinaria.modificarClientePorId(cliente3.getIdCliente(), 22976543);
 console.log(`Teléfono actualizado del Cliente 3: ${cliente3.getTelefono()}`);
 
 console.log("\n--- CLIENTES VIP---");
