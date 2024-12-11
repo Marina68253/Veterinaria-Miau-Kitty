@@ -1,7 +1,7 @@
 import { Veterinaria } from "./Veterinaria";
 import { Proveedor } from "./Proveedor";
-import * as rls from "readline-sync";
-import { log } from "console";
+
+
 
 export class RedVeterinaria {
     private veterinarias: Veterinaria[];
@@ -15,11 +15,9 @@ export class RedVeterinaria {
     }
 
 
-
     //Dar altas y modificar veterinaria
     darAltaVeterinaria(veterinaria: Veterinaria): void {
         this.veterinarias.push(veterinaria)
-        console.log(veterinaria);
     
     }
 

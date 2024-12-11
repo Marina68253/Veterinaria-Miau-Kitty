@@ -6,7 +6,7 @@ export class Proveedor {
     private telefono: number;
 
     constructor(nombre: string, telefono: number, dni: number) {
-        this.idProveedor = Date.now() + Math.floor(Math.random() * 500);
+        this.idProveedor = Math.floor(Math.random() * 500);
         this.nombre = nombre;
         this.telefono = telefono;
         this.dni = dni;
