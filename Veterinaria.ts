@@ -17,9 +17,11 @@ export class Veterinaria {
         this.pacientes = [];
     }
     
-    // getIdVeterinaria():number{
-    //     return this.idVeterinaria;
-    // }
+   
+    buscarClientePorId(id: number): Cliente | null {
+        const cliente = this.clientes.find((cliente) => cliente.getIdCliente() === id);
+        return cliente || null;
+      }
 
     // Métodos para manejar clientes..
     darAltaCliente(cliente: Cliente): void {
@@ -107,10 +109,5 @@ export class Veterinaria {
     obtenerPaciente(): Paciente[] {
         return this.pacientes;
     }
-    buscarClientePorId(id: number): Cliente | null {
-        const cliente = this.clientes.find((cliente) => cliente.getIdCliente() === id);
-        return cliente || null;
-      }
 
-      
 }
