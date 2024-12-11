@@ -1,18 +1,21 @@
-import * as readline from "readline";
+import * as readlineSync from "readline-sync";
 import { Paciente } from "./Paciente";
 import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
 import { RedVeterinaria } from "./RedVeterinaria";
 import { Veterinaria } from "./Veterinaria";
 import { read } from "fs";
-import { log } from "console";
 
+
+
+// Colores personalizados
+const pastelPink = "#F7C8D4";  // Rosa Pastel
+const pastelWhite = "#FFFFFF"; // Blanco
 
 
 const redVeterinaria = new RedVeterinaria();
 // // Función para mostrar el menú
-
-const readlineSync = require('readline-sync');
+const chalk = require('chalk');
 const mostrarTituloVeterinaria = () => {
   console.clear();
   console.log(`
@@ -29,7 +32,7 @@ const mostrarTituloVeterinaria = () => {
                                  ██▀        
     
     =========================================
-      Red Veterinaria »-»ᅳ  Miau Kitty  -ᅳ-► 
+      Red Veterinaria »-»ᅳ  ${chalk.magentaBright(" Miau Kitty ")} -ᅳ-► 
     =========================================
     
     
@@ -39,40 +42,60 @@ const mostrarTituloVeterinaria = () => {
 
 async function mostrarMenu() {
   mostrarTituloVeterinaria();
+  const titulo = chalk.hex(pastelPink).bold.underline;  // Título en rosa pastel
+  const opcion = chalk.hex(pastelPink).bold;            // Opciones en rosa pastel
+  const advertencia = chalk.hex("#FF6F61").bold;       // Rojo coral para advertencias
+  const pregunta = chalk.hex("#A9A9A9");               // Gris suave para preguntas
+
+
+  const veterinaria = new Veterinaria("Veterinaria Principal", "Cnel Suarez 223");
   let salir = false;
   while (!salir) {
+
+    console.log(titulo("\nMenú Principal:"));
+    console.log("---------------------------");
     console.log(`
-      Menú:
-      1.- Gestion de Veterinaria
-      2.-Gestion de Proveedores
-      3.-Gestion de Clientes
-      4.-Gestion de Paciente
-      5.-Salir
-     
-              `);
-    const opcionMenu = readlineSync.question("Seleccione una opcion: ");
+      ${opcion('1.🔍- Gestión de Veterinaria')}
+      ${opcion('2.🔍- Gestión de Proveedores')}
+      ${opcion('3.🔍- Gestión de Clientes')}
+      ${opcion('4.🔍- Gestión de Pacientes')}
+      ${advertencia('5.-⛔ Salir')}
+    `);
+    const opcionMenu = readlineSync.question(pregunta("Seleccione una opción: "));
     // console.log("opcionMenu:", opcionMenu.join());
     switch (opcionMenu) {
       case "1":
+
+        console.log(opcion("Ingresando a la gestión de veterinarias...\n"));
+        console.log("---------------------------");
         submenuVeterinarias();
         break;
 
       case "2":
+        console.log(opcion("Ingresando a la gestión de proveedores...\n"));
+        console.log("---------------------------");
         submenuProveedores();
         break;
-       case "3":
-        subMenuCliente();
+      case "3":
+        console.log(opcion("Ingresando a la gestión de clientes...\n"));
+        console.log("---------------------------");
+        submenuClientes(veterinaria);
         break;
 
-      // // case "4":
-      // //   subMenuPaciente();
-      // //   break;
+      case "4":
+        console.log(opcion("Ingresando a la gestión de pacientes...\n"));
+        console.log("---------------------------");
+        submenuPacientes(veterinaria);
+        break;
       case "5":
-        console.log("Saliendo del programa...");
+        console.log(advertencia("Saliendo del programa... ¡Hasta luego!🐾🐾"));
+        console.log("---------------------------");
         salir = true;
         break;
       default:
+
         console.log("Opcion invalida. Intente nuevamente.");
+        console.log("---------------------------");
 
 
 
@@ -80,157 +103,199 @@ async function mostrarMenu() {
 
 
   }
-  readlineSync.close();
+
 }
 async function submenuVeterinarias() {
+  const titulo = chalk.hex(pastelPink).bold.underline;  // Título en rosa pastel
+  const opciones = chalk.hex(pastelPink).bold;            // Opciones en rosa pastel
+  const advertencia = chalk.hex("#FF6F61").bold;       // Rojo coral para advertencias
+  const pregunta = chalk.hex("#A9A9A9");               // Gris suave para preguntas
+
   let salir = false;
   while (!salir) {
+    console.log("---------------------------");
     console.log(`
       Gestión de Veterinarias:
-      1. Crear Veterinaria
-      2. Modificar Veterinaria
-      3. Eliminar Veterinaria
-      4. Listar Veterinarias
-      0. Volver al menú principal
+      1.📋 Crear Veterinaria
+      2.❕❗ Modificar Veterinaria
+      3.⛔ Eliminar Veterinaria
+      4.✅ Listar Veterinarias
+      0.⭕ Volver al menú principal
+      
     `);
 
-    const opcion = readlineSync.question("Seleccione una opción: ");
+    const opcion = readlineSync.question(titulo("Seleccione una opción: "));
     switch (opcion) {
       case "1": // Crear Veterinaria
-        const nombreVete = readlineSync.question("Ingrese el nombre de la veterinaria: ");
-        const direccionVete = readlineSync.question("Ingrese la direccion de la veterinaria: ");
+        const nombreVete = readlineSync.question(opciones("Ingrese el nombre de la veterinaria: "));
+        const direccionVete = readlineSync.question(opciones("Ingrese la direccion de la veterinaria: "));
         const nuevaVeterinaria = new Veterinaria(nombreVete, direccionVete);
         redVeterinaria.darAltaVeterinaria(nuevaVeterinaria);
-        console.log("Veterinaria creada con exito.");
+        console.log((opciones("Veterinaria creada con exito.")));
         break;
       case "2": // Modificar Veterinaria
-        const idModVete = Number(readlineSync.question("Ingrese el ID de la veterinaria a modificar: "));
+        const idModVete = Number(readlineSync.question(advertencia("Ingrese el ID de la veterinaria a modificar: ")));
         const veterinariaEncontrada = redVeterinaria.obtenerVeterinarias().find(v => v.getIdVeterinaria() === idModVete);
         if (veterinariaEncontrada) {
-          const nuevoNombre = readlineSync.question("Ingrese el nuevo nombre: ");
-          const nuevaDireccion = readlineSync.question("Ingrese la nueva direccion: ");
+          const nuevoNombre = readlineSync.question(opciones("Ingrese el nuevo nombre: "));
+          console.log("---------------------------");
+          const nuevaDireccion = readlineSync.question(opciones("Ingrese la nueva direccion: "));
+          console.log("---------------------------");
           veterinariaEncontrada.modificarDatos(nuevoNombre, nuevaDireccion);
-          console.log("Veterinaria modificada con exito.");
+          console.log("---------------------------");
+          console.log(pregunta("Veterinaria modificada con exito."));
         } else {
-          console.log("Veterinaria no encontrada.");
+          console.log("---------------------------");
+          console.log(advertencia("Veterinaria no encontrada."));
         }
         break;
       case "3": // Eliminar Veterinaria
-        const idDelVete = Number(readlineSync.question("Ingrese el ID de la veterinaria a eliminar: "));
+        console.log("---------------------------");
+        const idDelVete = Number(readlineSync.question(opciones("Ingrese el ID de la veterinaria a eliminar: ")));
+        console.log("---------------------------");
         redVeterinaria.eliminarVeterinaria(idDelVete);
-        console.log("Veterinaria eliminada con exito.");
+        console.log(pregunta("Veterinaria eliminada con exito."));
+        console.log("---------------------------");
         break;
       case "4": // Listar Veterinarias
         const veterinarias = redVeterinaria.obtenerVeterinarias();
         if (veterinarias.length > 0) {
           veterinarias.forEach(v => v.mostrarInformacionVeterinaria());
         } else {
-          console.log("No hay veterinarias registradas.");
+          console.log("---------------------------");
+          console.log(advertencia("No hay veterinarias registradas."));
         }
         break;
       case "0": // Salir
         salir = true;
         break;
       default:
-        console.log("Opcion inválida. Intente nuevamente.");
+        console.log("---------------------------");
+        console.log(advertencia("Opcion inválida. Intente nuevamente."));
     }
   }
 }
 
 // Submenú para gestionar proveedores
 async function submenuProveedores() {
+
+  const titulo = chalk.hex(pastelPink).bold.underline;  // Título en rosa pastel
+  const opciones = chalk.hex(pastelWhite).bold;            // Opciones en rosa pastel
+  const advertencia = chalk.hex("#FF6F61").bold;       // Rojo coral para advertencias
+  const pregunta = chalk.hex("#A9A9A9");               // Gris suave para preguntas
   let salir = false;
   while (!salir) {
     console.log(`
+    
       Gestión de Proveedores:
-      1. Crear Proveedor
-      2. Modificar Proveedor
-      3. Eliminar Proveedor
-      4. Listar Proveedores
-      0. Volver al menú principal
+      1.📋 Crear Proveedor
+      2.❕ Modificar Proveedor
+      3.⛔ Eliminar Proveedor
+      4.✅ Listar Proveedores
+      0.⭕ Volver al menú principal
+      
     `);
 
-    const opcion = readlineSync.question("Seleccione una opcion: ");
+    const opcion = readlineSync.question(titulo("Seleccione una opcion: "));
+    console.log("---------------------------");
     switch (opcion) {
       case "1": // Crear Proveedor
-        const nombreProv = readlineSync.question("Ingrese el nombre del proveedor: ");
-        const telefonoProv = Number(readlineSync.question("Ingrese el teléfono: "));
-        const dniProv = Number(readlineSync.question("Ingrese el DNI: "));
+        const nombreProv = readlineSync.question(opciones("Ingrese el nombre del proveedor: "));
+        const telefonoProv = Number(readlineSync.question(opciones("Ingrese el teléfono: ")));
+        const dniProv = Number(readlineSync.question(opciones("Ingrese el DNI: ")));
         const nuevoProveedor = new Proveedor(nombreProv, telefonoProv, dniProv);
         redVeterinaria.darAltaProveedor(nuevoProveedor);
-        console.log("Proveedor creado con éxito.");
+        console.log("---------------------------");
+        console.log(titulo("Proveedor creado con éxito."));
         break;
       case "2": // Modificar Proveedor
-        const idModProv = Number(readlineSync.question("Ingrese el ID del proveedor a modificar: "));
+        const idModProv = Number(readlineSync.question(titulo("Ingrese el ID del proveedor a modificar: ")));
         const proveedorEncontrado = redVeterinaria.obtenerProveedores().find(p => p.getIdProveedor() === idModProv);
         if (proveedorEncontrado) {
-          const nuevoNombreProv = readlineSync.question("Ingrese el nuevo nombre: ");
-          const nuevoTelefonoProv = Number(readlineSync.question("Ingrese el nuevo teléfono: "));
+          const nuevoNombreProv = readlineSync.question(opciones("Ingrese el nuevo nombre: "));
+          const nuevoTelefonoProv = Number(readlineSync.question(opciones("Ingrese el nuevo teléfono: ")));
           const nuevoProveedorModificado = new Proveedor(nuevoNombreProv, nuevoTelefonoProv, proveedorEncontrado.getIdProveedor());
           redVeterinaria.modificarProveedor(idModProv, nuevoProveedorModificado);
-          console.log("Proveedor modificado con éxito.");
+          console.log("---------------------------");5
+          console.log(titulo("Proveedor modificado con éxito."));
         } else {
-          console.log("Proveedor no encontrado.");
+          console.log(advertencia("Proveedor no encontrado."));
         }
         break;
       case "3": // Eliminar Proveedor
-        const idDelProv = Number(readlineSync.question("Ingrese el ID del proveedor a eliminar: "));
+        const idDelProv = Number(readlineSync.question(titulo("Ingrese el ID del proveedor a eliminar: ")));
         redVeterinaria.eliminarProveedor(idDelProv);
-        console.log("Proveedor eliminado con éxito.");
+        console.log("---------------------------");
+        console.log(titulo("Proveedor eliminado con éxito."));
+        console.log("---------------------------");
         break;
       case "4": // Listar Proveedores
         const proveedores = redVeterinaria.obtenerProveedores();
         if (proveedores.length > 0) {
           proveedores.forEach(p => console.log(`ID: ${p.getIdProveedor()} - Nombre: ${p.getNombre()} - Teléfono: ${p.getTelefono()}`));
         } else {
-          console.log("No hay proveedores registrados.");
+          console.log(advertencia("No hay proveedores registrados."));
         }
         break;
+        case "0": // Salir
+        salir = true;
+        break;
+      default:
+        console.log("Opción inválida. Intente nuevamente.");
 
     }
   }
 }
+
 // Submenú para gestionar Clientes
 async function submenuClientes(veterinaria: Veterinaria) {
   let salir = false;
+
   while (!salir) {
-    console.log(`
-      Gestión de Clientes:
-      1. Registrar Cliente
-      2. Modificar Cliente
-      3. Eliminar Cliente
-      4. Listar Clientes
-      5. Registrar Visita de Cliente
-      0. Volver al menú principal
-    `);
+
+    console.log(`Gestión de Clientes:
+    1.📋 Registrar Cliente
+    2.📋 Modificar Cliente
+    3.❌ Eliminar Cliente
+    4.✅ Listar Clientes
+    5.✍🏻 Registrar Visita de Cliente
+    0.⭕ Volver al menú principal`);
+   
 
     const opcion = readlineSync.question("Seleccione una opción: ");
+    console.log("---------------------------");
+
     switch (opcion) {
       case "1": // Registrar Cliente
         const nombreCliente = readlineSync.question("Ingrese el nombre del cliente: ");
         const telefonoCliente = Number(readlineSync.question("Ingrese el teléfono del cliente: "));
         const nuevoCliente = new Cliente(nombreCliente, telefonoCliente);
         veterinaria.darAltaCliente(nuevoCliente);
+        console.log("---------------------------");
         console.log("Cliente registrado con éxito.");
         break;
       case "2": // Modificar Cliente
         const idModCliente = Number(readlineSync.question("Ingrese el ID del cliente a modificar: "));
-        const clienteModificar = veterinaria.get().find(c => c.getIdCliente() === idModCliente);
+        const clienteModificar = veterinaria.obtenerClientes().find(c => c.getIdCliente() === idModCliente);
         if (clienteModificar) {
           const nuevoNombreCliente = readlineSync.question("Ingrese el nuevo nombre del cliente: ");
           const nuevoTelefonoCliente = Number(readlineSync.question("Ingrese el nuevo teléfono del cliente: "));
+          console.log("---------------------------");
           const nuevoVipStatus = readlineSync.question("¿El cliente será VIP? (Sí/No): ").toLowerCase() === "sí";
           clienteModificar.setNombre(nuevoNombreCliente);
           clienteModificar.setTelefono(nuevoTelefonoCliente);
           clienteModificar.setEsVip(nuevoVipStatus);
           console.log("Cliente modificado con éxito.");
+          console.log("---------------------------");
         } else {
           console.log("Cliente no encontrado.");
+          console.log("---------------------------");
         }
         break;
       case "3": // Eliminar Cliente
         const idDelCliente = Number(readlineSync.question("Ingrese el ID del cliente a eliminar: "));
         veterinaria.eliminarCliente(idDelCliente);
+        console.log("---------------------------");
         console.log("Cliente eliminado con éxito.");
         break;
       case "4": // Listar Clientes
@@ -238,6 +303,7 @@ async function submenuClientes(veterinaria: Veterinaria) {
         if (clientes.length > 0) {
           clientes.forEach(c => c.mostrarInformacionCliente());
         } else {
+          console.log("---------------------------");
           console.log("No hay clientes registrados.");
         }
         break;
@@ -262,24 +328,36 @@ async function submenuClientes(veterinaria: Veterinaria) {
 // Submenú para gestionar Pacientes
 async function submenuPacientes(veterinaria: Veterinaria) {
   let salir = false;
-  while (!salir) {
-    console.log(`
-      Gestión de Pacientes:
-      1. Registrar Paciente
-      2. Modificar Paciente
-      3. Eliminar Paciente
-      4. Listar Pacientes
-      0. Volver al menú principal
-    `);
 
+  while (!salir) {
+
+   
+    console.log(`Gestión de Pacientes:
+    1.🐾 Registrar Paciente
+    2.❕❗ Modificar Paciente
+    3.❌ Eliminar Paciente
+    4.✅ Listar Pacientes
+    0.⭕ Volver al menú principal`);
+   
     const opcion = readlineSync.question("Seleccione una opción: ");
+    console.log("---------------------------");
+
     switch (opcion) {
       case "1": // Registrar Paciente
         const nombrePaciente = readlineSync.question("Ingrese el nombre del paciente: ");
         const especiePaciente = readlineSync.question("Ingrese la especie del paciente: ");
         const edadPaciente = Number(readlineSync.question("Ingrese la edad del paciente: "));
         const idClientePaciente = Number(readlineSync.question("Ingrese el ID del cliente asociado: "));
-        const nuevoPaciente = new Paciente(nombrePaciente, especiePaciente, edadPaciente, idClientePaciente);
+
+        const clienteAsociado = veterinaria.buscarClientePorId(idClientePaciente);
+        if (!clienteAsociado) {
+          console.log("---------------------------");
+          console.log("No se encontró un cliente con ese ID.");
+          console.log("---------------------------");
+          break;
+        }
+
+        const nuevoPaciente = new Paciente(idClientePaciente, nombrePaciente, especiePaciente, edadPaciente, clienteAsociado);
         veterinaria.darAltaPaciente(nuevoPaciente);
         console.log("Paciente registrado con éxito.");
         break;
@@ -293,14 +371,17 @@ async function submenuPacientes(veterinaria: Veterinaria) {
           pacienteModificar.setNombre(nuevoNombrePaciente);
           pacienteModificar.setEspecie(nuevaEspeciePaciente);
           pacienteModificar.setEdad(nuevaEdadPaciente);
+          console.log("---------------------------");
           console.log("Paciente modificado con éxito.");
         } else {
+          console.log("---------------------------");
           console.log("Paciente no encontrado.");
         }
         break;
       case "3": // Eliminar Paciente
         const idDelPaciente = Number(readlineSync.question("Ingrese el ID del paciente a eliminar: "));
         veterinaria.eliminarPaciente(idDelPaciente);
+        console.log("---------------------------");
         console.log("Paciente eliminado con éxito.");
         break;
       case "4": // Listar Pacientes
@@ -308,7 +389,9 @@ async function submenuPacientes(veterinaria: Veterinaria) {
         if (pacientes.length > 0) {
           pacientes.forEach(p => console.log(`ID: ${p.getIdCliente()} - Nombre: ${p.getNombre()} - Especie: ${p.getEspecie()} - Edad: ${p.getEdad()}`));
         } else {
+          console.log("---------------------------");
           console.log("No hay pacientes registrados.");
+          console.log("---------------------------");
         }
         break;
       case "0": // Salir
@@ -318,7 +401,6 @@ async function submenuPacientes(veterinaria: Veterinaria) {
         console.log("Opción inválida. Intente nuevamente.");
     }
   }
-  
 }
 
 
