@@ -107,5 +107,10 @@ export class Veterinaria {
     obtenerPaciente(): Paciente[] {
         return this.pacientes;
     }
+    buscarClientePorId(id: number): Cliente | null {
+        const cliente = this.clientes.find((cliente) => cliente.getIdCliente() === id);
+        return cliente || null;
+      }
 
+      
 }
