@@ -7,8 +7,8 @@ export class Paciente {
     private edad: number;
     private cliente: Cliente;
 
-    constructor(cliente: Cliente,nombre: string, especie: string, edad: number) {
-        this.idCliente = cliente.getIdCliente();
+    constructor( idCliente:number, nombre: string, especie: string, edad: number, cliente:Cliente,) {
+        this.idCliente=idCliente;
         this.cliente = cliente;
         this.nombre = nombre;
         this.especie = especie= (especie.toLowerCase()== "gato" || especie.toLowerCase()== "perro")? especie: "exotica"
@@ -18,7 +18,7 @@ export class Paciente {
     // Getters y Setters
    
      getIdCliente(): number {
-         return this.idCliente;
+         return this.cliente.getIdCliente();
      }
 
     getNombre(): string {

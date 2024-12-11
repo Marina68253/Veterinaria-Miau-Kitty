@@ -9,20 +9,24 @@ export class Veterinaria {
     private clientes: Cliente[];
     private pacientes: Paciente[];
 
-    constructor(idVeterinaria: number, nombre: string, direccion: string) {
-        this.idVeterinaria= idVeterinaria;
+    constructor(nombre: string, direccion: string) {
+        this.idVeterinaria= Math.floor(Math.random() * 1000);
         this.nombre = nombre;
         this.direccion = direccion;
         this.clientes = [];
         this.pacientes = [];
     }
+    
+    // getIdVeterinaria():number{
+    //     return this.idVeterinaria;
+    // }
 
     // Métodos para manejar clientes..
     darAltaCliente(cliente: Cliente): void {
         this.clientes.push(cliente);
     }
 
-    darBajaCliente(idCliente: number): void {
+    eliminarCliente(idCliente: number): void {
         this.clientes = this.clientes.filter(cliente => cliente.getIdCliente() !== idCliente);
     }
 
@@ -42,16 +46,33 @@ export class Veterinaria {
         this.setDireccion(direccion);  // Usa el setter para la dirección
     }
 
-    modificarClientePorId(idCliente: number, telefono: number): void {
+    modificarClientePorId(idCliente: number,nombre:string, telefono: number,esVip:boolean = false): void {
         for (let cliente of this.clientes) {
             if (cliente.getIdCliente() === idCliente) {
+                cliente.setNombre(nombre);
                 cliente.setTelefono(telefono); // Modifica el atributo teléfono
+                cliente.setEsVip(esVip);
                 console.log(`Cliente con ID ${idCliente} modificado exitosamente.`);
                 return;
             }
         }
         console.log(`Cliente con ID ${idCliente} no encontrado.`);
     }
+
+     modificarPacientePorId(idCliente:number,nombre:string,especie:string,edad:number):void{
+         for (let paciente of this.pacientes ){
+            if (paciente.getIdCliente()=== idCliente){
+                paciente.setNombre(nombre);
+                paciente.setEspecie(especie);
+                paciente.setEdad(edad);
+                console.log(`Paciente con ID ${idCliente} modificado con exito`);
+                return;
+                
+            }
+         }
+         console.log((`Cliente con ID ${idCliente} no encontrado`));
+         
+        }
 
     //Get y Set
     getIdVeterinaria(): number {
@@ -79,5 +100,12 @@ export class Veterinaria {
         Dirección: ${this.getDireccion()}`);
     }
 
+    obtenerClientes(): Cliente[] {
+        return this.clientes;
+    }
+
+    obtenerPaciente(): Paciente[] {
+        return this.pacientes;
+    }
 
 }
